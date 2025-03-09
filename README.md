@@ -37,11 +37,6 @@ This repository documents a research project carried out at the [Laboratory for 
 :-------------------------:|:-------------------------:|:-------------------------:
 ![](images/2023-08-01-04__736_real_B.bmp) |  ![](images/2023-08-01-04__736_real_A.bmp) | ![](images/2023-08-01-04__736_fake_B.bmp)
 
-<p align="center">
-<img src="results/epochs/hyperparameter_GAN_vanilla_epochs_results/hyperparameter_GAN_vanilla_epochs_results.gif" alt="Adafruit Feather 32u4 Radio board" width="700"/>
-<figcaption align = "center"><b>Looping through the epochs of a trained model</b></figcaption>
-</p>
-
 
 ## Table of Contents
 - [stereofog](#stereofog)
