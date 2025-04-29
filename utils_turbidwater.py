@@ -4,6 +4,10 @@ Created on Tue 15 Aug 2023
 
 Utility functions by Anton Pollak used in the stereofog project
 
+Modified April 29 2025 for the turbidwater project
+
+Tyson Skogerboe, Spencer Durrant, Merrill Datwyler
+
 
 """
 import os

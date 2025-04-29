@@ -6,7 +6,7 @@ import gif
 from ssim import SSIM
 from ssim.utils import get_gaussian_kernel
 from PIL import Image
-from utils_stereofog import calculate_model_results, generate_stats_from_log
+from utils_turbidwater import calculate_model_results, generate_stats_from_log
 from general_imports import *
 
 parser = argparse.ArgumentParser()
@@ -75,9 +75,6 @@ def produce_fig(epoch_index, image_index):
     plt.tight_layout()
 
     return fig
-
-# model_name = 'stereofog_pix2pix'
-# dataroot = 'datasets/stereofog_images'
 
 # checkpoints_directory = f'checkpoints/{model_name}'
 # checkpoints_directory = dataroot.replace('datasets', 'checkpoints')

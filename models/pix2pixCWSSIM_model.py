@@ -2,7 +2,7 @@ import torch
 from .base_model import BaseModel
 from . import networks
 # from pytorch_msssim import ssim, ms_ssim, SSIM, MS_SSIM
-from utils_stereofog import CW_SSIM
+from utils_turbidwater import CW_SSIM
 
 class Pix2PixCWSSIMModel(BaseModel):
     """ This class implements the pix2pix model, for learning a mapping from input images to output images given paired data.
