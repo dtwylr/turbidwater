@@ -11,7 +11,7 @@ import matplotlib
 import cv2
 import numpy as np
 from skimage.metrics import structural_similarity
-from utils_stereofog import variance_of_laplacian
+from utils_turbidwater import variance_of_laplacian
 from ssim import SSIM
 from ssim.utils import get_gaussian_kernel
 from pytorch_msssim import ms_ssim

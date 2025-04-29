@@ -39,7 +39,9 @@ This repository documents a research project carried out at the [Laboratory for 
 
 
 ## Table of Contents
-- [stereofog](#stereofog)
+- [STEREOFOG - Image-to-image machine translation enables computational defogging in real-world images ](#stereofog---image-to-image-machine-translation-enables-computational-defogging-in-real-world-images-)
+  - [Graphical Abstract](#graphical-abstract)
+  - [News](#news)
   - [Table of Contents](#table-of-contents)
   - [Goal](#goal)
   - [Potential applications](#potential-applications)
@@ -51,22 +53,39 @@ This repository documents a research project carried out at the [Laboratory for 
     - [Wiring \& Programming](#wiring--programming)
     - [Gimbal](#gimbal)
     - [Case](#case)
+    - [Handheld fogger](#handheld-fogger)
     - [Bill of Materials (BoM)](#bill-of-materials-bom)
+      - [Purchased Parts](#purchased-parts)
+      - [Manufactured parts](#manufactured-parts)
     - [CAD file attributions](#cad-file-attributions)
   - [Model Training](#model-training)
   - [Getting started](#getting-started)
+    - [1. Cloning the repository](#1-cloning-the-repository)
+    - [2. Installing a Python environment](#2-installing-a-python-environment)
+    - [3. Downloading the dataset](#3-downloading-the-dataset)
+    - [4. Preparing the dataset](#4-preparing-the-dataset)
+    - [5. Training a model](#5-training-a-model)
+    - [6. Testing a model](#6-testing-a-model)
+    - [7. Helper scripts](#7-helper-scripts)
   - [Synthetic data](#synthetic-data)
-    - [Foggy Cityscapes from Uni Tübingen](#foggy-cityscapes-from-uni-tübingen)
-    - [Foggy Cityscapes from ETH Zürich](#foggy-cityscapes-from-eth-zürich)
-    - [Foggy Carla from Uni Tübingen](#foggy-carla-from-uni-tübingen)
-    - [Foggy KITTI from Uni Tübingen (?)](#foggy-kitti-from-uni-tübingen-)
+    - [Semi-synthetic datasets](#semi-synthetic-datasets)
+      - [Foggy Cityscapes from Uni Tübingen](#foggy-cityscapes-from-uni-tübingen)
+      - [Foggy Cityscapes from ETH Zürich](#foggy-cityscapes-from-eth-zürich)
+    - [Fully synthetic datasets](#fully-synthetic-datasets)
+      - [Foggy CARLA from Uni Tübingen](#foggy-carla-from-uni-tübingen)
   - [Collected dataset](#collected-dataset)
   - [pix2pix on dataset](#pix2pix-on-dataset)
   - [Limitations](#limitations)
-  - [Licensing](#licensing)
-  - [Citation](#citation)
-  - [References](#references)
-  - [Appendix](#appendix)
+    - [Overexposure](#overexposure)
+    - [Weather conditions](#weather-conditions)
+- [Licensing](#licensing)
+  - [Code](#code)
+  - [Dataset](#dataset)
+  - [Hardware](#hardware)
+- [Citation](#citation)
+- [References](#references)
+- [Appendix](#appendix)
+  - [Fog Decay Study](#fog-decay-study)
 
 
 ## Goal
@@ -342,12 +361,12 @@ All models were trained for the default 200 epochs for the pix2pix model. The tr
 
 Clone the repository using `git`:
 ```bash
-git clone https://github.com/apoll2000/stereofog.git
+git clone https://github.com/dtwylr/turbidwater.git
 ```
 
 Navigate into the repository:
 ```bash
-cd stereofog
+cd turbidwater
 ```
 
 ### 2. Installing a Python environment
@@ -357,21 +376,21 @@ Next, an appropriate Python environment needs to be created. All code was run on
 ---
 The environment can be created using `conda` with:
 ```bash
-conda create --name stereofog python=3.9.7
+conda create --name turbidwater python=3.9.7
 ```
 
 Or using `pyenv virtualenv` with:
 ```bash
-pyenv virtualenv 3.9.7 stereofog
+pyenv virtualenv 3.9.7 turbidwater
 ```
 ---
 Then activate the environment with:
 ```bash
-conda activate stereofog
+conda activate turbidwater
 ```
 Or:
 ```bash
-pyenv activate stereofog
+pyenv activate turbidwater
 ```
 
 ---
@@ -381,7 +400,7 @@ conda install pip
 ```
 before to install pip). The packages are listed in the `requirements.txt` and can be installed with:
 ```bash
-pip install -r requirements.txt
+pip install -r requirements_pix2pix.txt
 ```
 
 In case you want to install them manually, the packages include:
@@ -397,30 +416,29 @@ It is important that you specify the right `torch` version if you would like to 
 ### 3. Downloading the dataset
 
 The dataset is currently being hosted here:
-[TUBCloud](https://tubcloud.tu-berlin.de/s/TWW4ABJSarpZ7Mc). Depending on the further development of the project, this might not be the final storing location.
+[Google Drive](https://drive.google.com/drive/folders/1tGZczPBOkcgKFxADi7oUmbMxPnf2oElD?usp=share_link).
 
-Place the `stereofog_images` folder into the `datasets` folder of the repository:
+Place the dated folders into the `datasets` folder of the repository:
 
 ```bash
 -- datasets
-    |-- stereofog_images
-        |-- 2023-08-03-04
-            |-- A
-                |-- 01-04_08_23__1.bmp
-                |-- 01-04_08_23__2.bmp
-                |-- ...
-            |-- B
-                |-- 01-04_08_23__1.bmp
-                |-- 01-04_08_23__2.bmp
-                |-- ...
-        |-- ...
+    |-- 2023-08-03-04
+        |-- A
+            |-- 01-04_08_23__1.bmp
+            |-- 01-04_08_23__2.bmp
+            |-- ...
+        |-- B
+            |-- 01-04_08_23__1.bmp
+            |-- 01-04_08_23__2.bmp
+            |-- ...
+    |-- ...
 ```
 
 ### 4. Preparing the dataset
 
 The dataset needs to be prepared for training. This includes transforming the folder structure into one compatible with the pix2pix framework and splitting the dataset into training, validation and testing sets. It can be performed using the following command:
 ```bash
-python preprocess_stereofog_dataset.py --dataroot path/to/dataset
+python preprocess_turbidwater_dataset.py --dataroot path/to/dataset
 ```
 
 ### 5. Training a model
@@ -445,7 +463,8 @@ This GitHub page includes several helper scripts to perform different actions li
 
 These are:
 Preprocessing:
-- `preprocess_stereofog_dataset.py`
+- `preprocess_turbidwater_dataset.py`
+
 Hyperparameter tuning:
 - `hyperparameter_dropoutRate.py`
 - `hyperparameter_GAN.py`
@@ -458,6 +477,7 @@ Hyperparameter tuning:
 - `hyperparameter_normalization.py`
 - `hyperparameter_Res9AndMore.py`
 - `hyperparameter_supertraining.py`
+
 Visualization:
 - `plot_model_results.py`
 - `evaluate_model_group.py`

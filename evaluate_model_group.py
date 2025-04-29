@@ -4,7 +4,7 @@ from general_imports import *
 
 import argparse
 import random
-from utils_stereofog import calculate_model_results
+from utils_turbidwater import calculate_model_results
 
 parser = argparse.ArgumentParser()
 
@@ -69,9 +69,6 @@ except:
 
 limit = len(images_to_plot)
 
-# os.listdir('./datasets/stereofog_data/A/test')[0]
-# orig_img = plt.imread('./datasets/stereofog_data/A/test/2023-08-01-04__20.bmp')
-# ratio = orig_img.shape[1]/orig_img.shape[0]
 width_per_image = 4
 height_per_image = width_per_image / ratio
 

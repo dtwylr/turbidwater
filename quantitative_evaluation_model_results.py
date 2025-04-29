@@ -9,7 +9,7 @@ from ssim import SSIM
 from ssim.utils import get_gaussian_kernel
 from PIL import Image
 import cv2
-from utils_stereofog import calculate_model_results
+from utils_turbidwater import calculate_model_results
 
 
 parser = argparse.ArgumentParser()
